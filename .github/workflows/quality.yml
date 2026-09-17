@@ -16,10 +16,21 @@ jobs:
         with:
           deno-version: v2.x
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
       - name: Type-check Edge Functions
         run: |
           deno check supabase/functions/snarky-how-to/index.ts
           deno check supabase/functions/snarky-youtube/index.ts
+
+      - name: Validate video production source
+        run: |
+          python -m py_compile tools/snarky_video_factory.py
+          python -m json.tool content/youtube/episode-001/scenes.json >/dev/null
+          test -s content/youtube/episode-001/full.srt
+          test -s content/youtube/episode-001/short.srt
 
       - name: Verify discovery and truth contracts
         run: |
