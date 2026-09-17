@@ -1,0 +1,18 @@
+# Generated media and local render scratch
+out/
+*_work/
+*.mp4
+*.wav
+*.aac
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Supabase local state
+.supabase/
+
+# OS/editor
+.DS_Store
+.vscode/
