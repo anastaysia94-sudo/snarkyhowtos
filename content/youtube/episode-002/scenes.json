@@ -1,0 +1,30 @@
+{
+  "full": {
+    "size": [1920, 1080],
+    "slug": "snarky_how_to_002_full",
+    "thumbnail_title": "IS THIS REMOTE JOB A SCAM?",
+    "thumbnail_subtitle": "Four flags. Two-minute check.",
+    "scenes": [
+      {"kicker":"SNARKY HOW-TO #002","title":"The job that is in a hurry.","body":"A real remote job can wait one extra day. A fake one shouts because delay kills the sale.","voice":"A real remote job can wait one extra day. A fake one cannot, which is why it shouts. This is a checklist, not a crime drama.","cta":"CHECK FIRST. APPLY SECOND."},
+      {"kicker":"FLAG 1","title":"They pay you to pay them.","body":"Equipment fees • training fees • software licenses • 'starter kits'","voice":"Flag one. They pay you to pay them. Equipment fees, training fees, software licenses. A job that starts with your debit card is not onboarding.","number":1},
+      {"kicker":"FLAG 2","title":"The company has no body.","body":"No working website • no real address • no named humans • logo in a Google Doc","voice":"Flag two. The company has no body. No real address, no working site, no named humans. A logo in a Google Doc is clip art with ambition.","number":2},
+      {"kicker":"FLAG 3","title":"The interview never happens.","body":"A text. A form. An offer in twelve minutes.","voice":"Flag three. There is no interview. Just a text, a form, and an offer in twelve minutes. Hiring is annoying. Scammers skip the annoying part.","number":3},
+      {"kicker":"FLAG 4","title":"The check arrives first.","body":"Buy gear. Wire the rest back. The check can bounce after the cash is gone.","voice":"Flag four. A check arrives first. Then they ask you to buy gear and wire the rest back. That check can bounce after you sent the cash.","number":4},
+      {"kicker":"THE CHECK","title":"Two minutes. Type it yourself.","body":"Search the exact company name. Open the official careers page. Do not tap the texted link.","voice":"Two-minute check. Search the exact company name plus the word careers. Open the official site yourself. Do not use the link they texted."},
+      {"kicker":"IF MONEY LEFT","title":"Use official channels.","body":"Complain through official government or bank channels. Do not pay a recovery expert who DMs you.","voice":"If you already sent money, use official complaint channels. Do not pay a recovery expert who direct messages you."},
+      {"kicker":"NEXT MOVE","title":"Save the card. Close the tab.","body":"A real employer will survive a slow Tuesday. Keep your selfie and your routing number.","voice":"A real employer will survive a slow Tuesday. Save the card. Close the tab. Keep your selfie.","cta":"LINK IN DESCRIPTION →"}
+    ]
+  },
+  "short": {
+    "size": [1080, 1920],
+    "slug": "snarky_how_to_002_short",
+    "thumbnail_title": "NOT A JOB",
+    "thumbnail_subtitle": "If they pay you to pay them",
+    "scenes": [
+      {"kicker":"SNARKY HOW-TO","title":"If they pay you to pay them, it is not a job.","body":"No equipment fee. No starter check. No mystery Gmail employer.","voice":"If they pay you to pay them, it is not a job. No equipment fee. No training fee. No starter check."},
+      {"kicker":"SKIP","title":"No body, no interview, no tap.","body":"Logo-only companies and twelve-minute offers fail the sniff test.","voice":"No company with only a logo and a Gmail address. No offer before a real conversation."},
+      {"kicker":"CHECK","title":"Type the name yourself.","body":"Open the official careers page. Do not tap their link.","voice":"Type the company name yourself. Do not tap their link."},
+      {"kicker":"DONE","title":"A real job can wait one day.","body":"Save the checklist. Close the tab.","voice":"A real job can wait one day. Save the checklist.","cta":"LINK →"}
+    ]
+  }
+}
