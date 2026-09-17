@@ -45,7 +45,7 @@ jobs:
         run: |
           curl --fail --silent --show-error --location \
             https://nqcshihyfhthywpseilx.supabase.co/functions/v1/snarky-how-to \
-            | grep -q 'Stop building the empire before the invoice'
+            | grep -q 'Do not build the empire before the invoice'
 
       - name: Verify YouTube tracking redirect
         run: |
