@@ -30,10 +30,14 @@ jobs:
           pip install -r requirements-video.txt
           python -m py_compile tools/snarky_video_factory.py tools/make_og_image.py
           python -m json.tool content/youtube/episode-001/scenes.json >/dev/null
+          python -m json.tool content/youtube/episode-002/scenes.json >/dev/null
           python -m json.tool content/youtube/_TEMPLATE/scenes.template.json >/dev/null
           python tools/snarky_video_factory.py content/youtube/episode-001/scenes.json full /tmp/dry --dry-run
           test -s content/youtube/episode-001/full.srt
           test -s content/youtube/episode-001/short.srt
+          test -s content/youtube/episode-002/full.srt
+          test -s content/youtube/episode-002/short.srt
+          node --check cloudflare/worker.js
 
       - name: Verify discovery and truth contracts
         run: |
@@ -54,7 +58,7 @@ jobs:
           SUPABASE_URL: https://example.supabase.co
           SUPABASE_SERVICE_ROLE_KEY: dummy-local-key
         run: |
-          deno run --allow-env --allow-net supabase/functions/snarky-how-to/index.ts &
+          deno run --allow-env --allow-net --allow-import supabase/functions/snarky-how-to/index.ts &
           SRV=$!
           trap "kill $SRV" EXIT
           for i in $(seq 1 30); do curl --silent --fail http://localhost:8000/healthz && break; sleep 1; done
@@ -84,7 +88,7 @@ jobs:
           SUPABASE_URL: https://example.supabase.co
           SUPABASE_SERVICE_ROLE_KEY: dummy-local-key
         run: |
-          deno run --allow-env --allow-net supabase/functions/snarky-youtube/index.ts &
+          deno run --allow-env --allow-net --allow-import supabase/functions/snarky-youtube/index.ts &
           SRV=$!
           trap "kill $SRV" EXIT
           sleep 3

@@ -5,7 +5,11 @@ import { createClient } from "jsr:@supabase/supabase-js@2";
 const url = Deno.env.get("SUPABASE_URL")!;
 const key = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 const db = createClient(url, key, { auth: { persistSession: false } });
-const target = `${url}/functions/v1/snarky-how-to`;
+// Land on the rendered site (GitHub Pages) when SITE_BASE_URL is set;
+// otherwise fall back to the raw function URL (shows source — see
+// cloudflare/README.md for why the gateway forces text/plain).
+const siteBase = (Deno.env.get("SITE_BASE_URL") || "").replace(/\/$/, "");
+const target = siteBase || `${url}/functions/v1/snarky-how-to`;
 const channel = Deno.env.get("YOUTUBE_CHANNEL_URL") ||
   "https://www.youtube.com/@SnarkyHowTos"; // verified 2026-09-20
 

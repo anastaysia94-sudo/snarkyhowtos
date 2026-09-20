@@ -2,13 +2,20 @@
 
 Practical how-to content with a dry sense of humor and a measurable action path.
 
-**Live guide:** https://nqcshihyfhthywpseilx.supabase.co/functions/v1/snarky-how-to
+**Live guide:** https://anastaysia94-sudo.github.io/snarkyhowtos/
 
-> Why does the raw link show code instead of the page? Supabase's gateway
-> force-serves function responses on `*.supabase.co` as `text/plain` + a
-> `sandbox` CSP (verified via headers 2026-09-20), so browsers display the
-> HTML source. The fix is the free Cloudflare Worker in `cloudflare/` — see
-> `cloudflare/README.md`, then use `https://snarkyhowto.com/` + `/go` links.
+## Hosting (all free, no domain required)
+
+| Piece | Host | Why |
+|---|---|---|
+| All pages (`/`, `/episodes`, …) | GitHub Pages (`anastaysia94-sudo.github.io/snarkyhowtos`) | Correct content types, HTTPS, auto-deploy from `main` via `.github/workflows/pages.yml` |
+| Analytics API + YouTube redirects | Supabase Edge Functions | Server-side DB writes; redirects/JSON are unaffected by the gateway's `text/plain` override |
+| Custom domain (optional, later) | Cloudflare Worker in `cloudflare/` | Only needed if a branded domain is ever wanted — see `cloudflare/README.md` |
+
+> Why not serve pages from Supabase directly? Its gateway force-serves
+> function responses on `*.supabase.co` as `text/plain` + a `sandbox` CSP
+> (verified via headers 2026-09-20), so browsers show HTML source instead of
+> rendering. Pages fixed that for $0.
 
 ## What this repo is
 
@@ -57,7 +64,12 @@ Reporting: `sps_snarky_daily_events`, `sps_snarky_campaign_funnel`, `sps_snarky_
 
 ## Deployment
 
-Production currently runs on Supabase project `nqcshihyfhthywpseilx`.
+**Pages (automatic):** one-time, set repo Settings → Pages → Source: “GitHub
+Actions”. Every push to `main` then rebuilds `dist/` from the same TS source
+as the Edge Function and publishes it. No secrets: the workflow env is public.
+
+**Functions (manual, when API/redirect code changes):** project
+`nqcshihyfhthywpseilx`.
 
 ```bash
 supabase functions deploy snarky-how-to --project-ref nqcshihyfhthywpseilx --no-verify-jwt
@@ -66,8 +78,13 @@ supabase functions deploy snarky-youtube --project-ref nqcshihyfhthywpseilx --no
 
 `--no-verify-jwt` is intentional for these public endpoints. The browser never receives the Supabase service-role key; database writes happen server-side.
 
-Optional env (set with `supabase secrets set`): `SITE_BASE_URL` (custom domain —
-flips all canonicals, no code change), `YOUTUBE_CHANNEL_URL`, `NEWSLETTER_URL`.
+**Env (`supabase secrets set`, then redeploy):**
+
+| Var | Value | Effect |
+|---|---|---|
+| `SITE_BASE_URL` | `https://anastaysia94-sudo.github.io/snarkyhowtos` | YouTube redirects land on the rendered site; function canonicals point at Pages |
+| `YOUTUBE_CHANNEL_URL` | only if the handle moves | default is already `@SnarkyHowTos` |
+| `NEWSLETTER_URL` | Beehiiv URL when it exists | flips newsletter CTAs from “opening soon” to live |
 
 ## Video pipeline
 

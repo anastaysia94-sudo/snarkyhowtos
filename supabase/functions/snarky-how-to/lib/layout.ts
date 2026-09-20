@@ -2,6 +2,7 @@
 // All rendered content is authored in this repo (no user input is reflected),
 // so there is no stored-XSS surface on these pages.
 import {
+  ANALYTICS_URL,
   LAST_UPDATED,
   NEWSLETTER_URL,
   OFFER_PICKER,
@@ -21,7 +22,7 @@ export function css(): string {
 export function baseScript(): string {
   return `<script>
 (function(){
-var endpoint=location.href.split('?')[0];
+var endpoint=((location.hostname==='localhost'||location.hostname==='127.0.0.1')?location.href.split('?')[0]:'${ANALYTICS_URL}');
 var sid=null;
 try{sid=localStorage.getItem('sht_sid');if(!sid){sid=(crypto.randomUUID?crypto.randomUUID():'sid-'+Date.now()+'-'+Math.random());localStorage.setItem('sht_sid',sid)}}catch(e){sid='anon-'+Math.random()}
 function track(event_name,meta){meta=meta||{};try{fetch(endpoint,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({event_name:event_name,session_id:sid,meta:meta}),keepalive:true}).catch(function(){})}catch(e){}}
@@ -29,7 +30,7 @@ var params=new URLSearchParams(location.search);
 var campaign=params.get('campaign')||params.get('utm_campaign')||null;
 var ref='direct';
 try{if(document.referrer){ref=new URL(document.referrer).hostname}}catch(e){}
-track('page_view',{ref:ref,from:params.get('from')||null,campaign:campaign});
+track('page_view',{ref:ref,from:params.get('from')||null,campaign:campaign,page:location.pathname});
 document.querySelectorAll('[data-track]').forEach(function(el){
 el.addEventListener('click',function(){
 var m={placement:el.getAttribute('data-placement')||el.id||null,campaign:campaign};

@@ -1,4 +1,5 @@
-# Generated media and local render scratch
+# Generated media, static export, and local render scratch
+dist/
 out/
 *_work/
 *.mp4

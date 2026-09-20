@@ -7,8 +7,19 @@ export const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 export const SERVICE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 
 const SITE_BASE_OVERRIDE = (Deno.env.get("SITE_BASE_URL") || "").replace(/\/$/, "");
+// Where does SITE_BASE_URL come from? It's just this project's own env var:
+// - GitHub Pages export: set in .github/workflows/pages.yml (canonical host).
+// - Edge Functions: `supabase secrets set SITE_BASE_URL=<pages-url>` so the
+//   youtube redirect lands on the rendered site instead of the raw function.
+// - Unset anywhere: falls back to the raw function URL (API/legacy mode).
 export const SITE_BASE = SITE_BASE_OVERRIDE ||
   `${SUPABASE_URL}/functions/v1/snarky-how-to`;
+
+// Analytics POST target. Absolute on purpose: the same rendered pages run on
+// GitHub Pages (cross-origin POST, allowed by CORS * on the function) and on
+// the function itself (same-origin). Response.json() needs no content-type,
+// so the gateway's text/plain override doesn't affect event ingestion.
+export const ANALYTICS_URL = `${SUPABASE_URL}/functions/v1/snarky-how-to`;
 
 export const SITE_NAME = "Snarky How-To";
 export const TAGLINE = "Real solutions. No boring B.S.";

@@ -7,23 +7,29 @@ branch: arena/01a0bece-snarkyhowtos
 when: 2026-09-20
 ```
 
-Session 2: recovered branch after sandbox re-clone (reset to pushed 628b3ed,
-merged main f25ff4b for ep002 — campaigns match convention, no config change).
+Session 3: user vetoed buying a domain; pivoted hosting to GitHub Pages ($0).
+Pages serves all HTML (correct content types); Supabase keeps analytics API +
+youtube 302s (both immune to the text/plain override). HubSpot rejected as
+wrong tool (CMS vs generated app + API + crawler files).
 
-Two user items done:
-1. Channel https://www.youtube.com/@SnarkyHowTos verified (exists) and wired
-   into config.ts + snarky-youtube (was placeholder @SnarkyHowTo). Note: it is
-   a repurposed personal account with old music playlists — suggest unlisting
-   them before launch.
-2. "Live guide shows code": root-caused via headers. Supabase gateway forces
-   `Content-Type: text/plain` + `CSP: default-src 'none'; sandbox` + nosniff
-   on *.supabase.co function responses (anti-abuse; function code is correct).
-   No site can render there. Fix built: cloudflare/worker.js + wrangler.toml +
-   cloudflare/README.md (restores content types + our CSP, /go links, edge
-   cache, CORS preflight). README + SEO playbook + monetization + template
-   updated; CI gained node --check, ep002 validation, and a non-blocking live
-   content-type reporter step.
+Built:
+- tools/export_static.ts: renders every route to dist/ from the same TS
+  source (dual page.html + page/index.html, 404.html, .nojekyll, robots,
+  sitemap, feed+rss, llms.txt, manifest, favicons, api/summary html+json).
+- .github/workflows/pages.yml: build on main push + manual dispatch,
+  export sanity greps, upload + deploy Pages. Needs human: Settings →
+  Pages → Source "GitHub Actions".
+- config ANALYTICS_URL (absolute function URL); baseScript posts there
+  except localhost (dev stays local); page_view gains page pathname meta.
+- youtube redirect target honors SITE_BASE_URL (set secret to Pages URL).
+- Docs: README hosting table + secrets table, playbook/monetization
+  de-domained, cloudflare/ demoted to optional-future.
+- quality.yml: --allow-import on deno runs, ep002 validation (kept).
 
-Validated: worker node --check, ep002 JSON, no stale handle strings.
-Deploy order in cloudflare/README.md step 7. Do NOT mark SEO done until the
-Worker is live — crawlers see text/plain until then.
+Caution: parallel same-file edit_file calls race (last write wins, others
+silently lost). This session: one edit per file per batch, grep-verify each.
+Final audit: 18/18 checks green, inline JS node --check OK.
+
+Next: open PR (triggers Quality on this code for the first time), enable
+Pages, merge, `supabase secrets set SITE_BASE_URL=https://anastaysia94-sudo.github.io/snarkyhowtos`
++ redeploy functions, verify render + headers + funnel, publish Ep 001.

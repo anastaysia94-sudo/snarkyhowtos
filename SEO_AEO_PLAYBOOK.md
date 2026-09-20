@@ -33,9 +33,13 @@
 
 ## Human checklist (cannot be coded)
 
-1. **Custom domain** (biggest single SEO lever — function URLs barely rank):
-   Cloudflare → DNS → proxy to the function → set `SITE_BASE_URL` secret →
-   redeploy → verify canonicals + sitemap URLs.
+1. **Publish on GitHub Pages** (the hard requirement — raw function URLs
+   serve `text/plain` + `sandbox` CSP by gateway design, so they show source
+   and crawlers won't index them): Settings → Pages → Source “GitHub
+   Actions”, push to `main`, verify `https://anastaysia94-sudo.github.io/snarkyhowtos/`
+   renders with `content-type: text/html`, then submit
+   `…/sitemap.xml` to Search Console + Bing. A custom domain later is
+   optional (`cloudflare/README.md` Worker), not required.
 2. **Search Console + Bing Webmaster**: add property, submit sitemap,
    request indexing for `/`, `/episodes`, `/episode-001`; fix any
    “crawled, not indexed” with internal links from new episodes.

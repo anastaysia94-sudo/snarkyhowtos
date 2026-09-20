@@ -1,0 +1,68 @@
+# Deploy the static site to GitHub Pages (free hosting, correct headers).
+#
+# One-time setup (human): repo Settings -> Pages -> Source: "GitHub Actions".
+# Then every push to main rebuilds + publishes. Manual runs (Actions tab ->
+# "Deploy to GitHub Pages" -> Run workflow) can preview any branch.
+#
+# No secrets needed: both env values below are already public.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      SUPABASE_URL: https://nqcshihyfhthywpseilx.supabase.co
+      SUPABASE_SERVICE_ROLE_KEY: dummy-export-only
+      SITE_BASE_URL: https://anastaysia94-sudo.github.io/snarkyhowtos
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: Export static site
+        run: deno run --allow-env --allow-read --allow-write --allow-import tools/export_static.ts
+
+      - name: Sanity-check export
+        run: |
+          test -s dist/index.html
+          grep -q 'Do not build the empire before the invoice' dist/index.html
+          grep -q 'FAQPage' dist/index.html
+          grep -q 'https://nqcshihyfhthywpseilx.supabase.co/functions/v1/snarky-how-to' dist/index.html
+          grep -q 'VideoObject' dist/episode-001.html
+          grep -q '<urlset' dist/sitemap.xml
+          grep -q 'Citation preference' dist/llms.txt
+          grep -q '<rss version' dist/feed.xml
+          grep -q 'episode_001_transcript' dist/api/summary.json
+          test -s dist/404.html
+          test -f dist/.nojekyll
+          echo "export OK: $(find dist -type f | wc -l) files"
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

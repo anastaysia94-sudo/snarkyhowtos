@@ -17,8 +17,9 @@ layer is honest, cheap to start, and stacked on the free stack below.
 
 | Job | Free pick | Cost to start | Notes |
 |---|---|---|---|
-| Domain + DNS | Cloudflare Registrar + proxy | ~$10/yr (the one bill) | `snarkyhowto.com` → Supabase function; free CDN/caching |
-| Site hosting | Supabase Edge Functions | $0 (free tier) | Already deployed; set `SITE_BASE_URL` after DNS |
+| Site hosting | GitHub Pages (`*.github.io`) | $0 | Correct headers, HTTPS, auto-deploy; no domain needed |
+| API + redirects | Supabase Edge Functions | $0 (free tier) | Analytics POSTs + YouTube 302s; set `SITE_BASE_URL` to the Pages URL |
+| Custom domain | Cloudflare (+ optional Worker) | ~$10/yr, optional | Only if a branded domain is wanted later |
 | Analytics | Built-in privacy-light events + funnel views | $0 | `sps_snarky_campaign_funnel`; add Search Console (free) |
 | Newsletter | Beehiiv free (up to 2,500 subs, ad network built in) | $0 | Set `NEWSLETTER_URL`, then flip site CTAs live |
 | Video voice | Piper TTS offline (free) → ElevenLabs free tier later | $0 | `SNARKY_TTS_ENGINE=piper`; disclose synthetic voice |
@@ -68,7 +69,7 @@ layer is honest, cheap to start, and stacked on the free stack below.
 
 **Days 1–30 — Publish + verify.**
 - [x] Channel verified + wired: `https://www.youtube.com/@SnarkyHowTos` (2026-09-20; repurposed account — unlist old unrelated playlists before launch)
-- [ ] Buy domain via Cloudflare, deploy Worker proxy (`cloudflare/README.md` — required: raw function URL renders as code), set `SITE_BASE_URL`
+- [ ] Enable GitHub Pages (Settings → Pages → Source: GitHub Actions), push to `main`, verify the site renders; set `SITE_BASE_URL` secret to the Pages URL + redeploy functions (domain purchase: optional, skip it)
 - [ ] Submit sitemap to Search Console + Bing; request indexing for `/`, `/episodes`, `/episode-001`
 - [ ] Publish Ep 001 (full + Short) with trackable links; pin comment
 - [ ] Create Beehiiv pub, set `NEWSLETTER_URL`, send issue #0 to friends

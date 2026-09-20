@@ -1,4 +1,9 @@
-# Public proxy: why the raw function URL shows code, and the fix
+# Public proxy (OPTIONAL — only for a future custom domain)
+
+> Status 2026-09-20: GitHub Pages is the primary host (free, correct headers,
+> no domain needed). Keep this Worker in the drawer: it becomes useful only if
+> a branded domain like `snarkyhowto.com` is ever wanted. Everything below
+> still applies on that day.
 
 ## The problem (verified 2026-09-20)
 
