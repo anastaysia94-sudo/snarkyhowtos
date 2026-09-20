@@ -1,2 +1,7 @@
+# pip deps for tools/snarky_video_factory.py + tools/make_og_image.py
 Pillow>=10,<12
 numpy>=1.26,<3
+
+# System binaries (install via apt/brew, not pip): ffmpeg, ffprobe, espeak
+# Optional natural voice (free/offline): Piper TTS + an en_US onnx model,
+# wired via SNARKY_TTS_ENGINE=piper and SNARKY_PIPER_MODEL=/path/to/model.onnx

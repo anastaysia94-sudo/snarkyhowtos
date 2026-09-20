@@ -1,0 +1,26 @@
+{
+  "_readme": "Copy to content/youtube/episode-0NN/scenes.json. Slugs MUST match snarky_how_to_0NN_full|short so the factory derives tracking campaigns automatically. Shorts: keep titles <= 42 chars (YouTube UI overlaps bottom ~15% and right rail).",
+  "full": {
+    "size": [1920, 1080],
+    "slug": "snarky_how_to_0NN_full",
+    "video_title": "How to ... (full YouTube title here)",
+    "thumbnail_title": "BIG PROMISE HERE",
+    "thumbnail_subtitle": "Without the painful part",
+    "scenes": [
+      {"kicker": "SNARKY HOW-TO #0NN", "title": "Hook in one sentence.", "body": "Problem in plain words. No jargon.", "voice": "Say the hook out loud exactly as written. Numbers and abbreviations must be speakable.", "cta": "START HERE."},
+      {"kicker": "STEP 1", "title": "First concrete move.", "body": "What to do, specifically.", "voice": "Explain the first concrete move in two short sentences.", "number": 1},
+      {"kicker": "NEXT MOVE", "title": "Do the next small thing.", "body": "Open the guide. Use the asset. Send the thing.", "voice": "Your next step is one small thing. Open the guide in the description and do it today.", "cta": "LINK IN DESCRIPTION →"}
+    ]
+  },
+  "short": {
+    "size": [1080, 1920],
+    "slug": "snarky_how_to_0NN_short",
+    "video_title": "Hook in 6 words #Shorts",
+    "thumbnail_title": "SHORT HOOK HERE",
+    "thumbnail_subtitle": "The payoff",
+    "scenes": [
+      {"kicker": "SNARKY HOW-TO", "title": "Hook fast.", "body": "One line. Big pain.", "voice": "Hook fast. Name the painful thing in one breath."},
+      {"kicker": "THE FIX", "title": "One move.", "body": "Do this one thing.", "voice": "Do this one thing today. The guide in the description has the template.", "cta": "LINK →"}
+    ]
+  }
+}

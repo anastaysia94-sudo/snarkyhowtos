@@ -6,16 +6,35 @@ Requirements:
 - Pillow
 - numpy
 - ffmpeg / ffprobe
-- espeak
+- espeak (default voice) or Piper (natural voice, free/offline)
 
 Usage:
     python tools/snarky_video_factory.py content/youtube/episode-001/scenes.json full out/
     python tools/snarky_video_factory.py content/youtube/episode-001/scenes.json short out/
+    python tools/snarky_video_factory.py scenes.json full out/ --dry-run   # plan only, no ffmpeg
+
+Outputs per render (SLUG = config slug):
+    SLUG.mp4              final video (H.264/AAC, loudness-normalized for YouTube)
+    SLUG.srt              captions (YouTube upload)
+    SLUG.vtt              captions (HTML5 / accessibility)
+    SLUG_chapters.txt     MM:SS chapter list (paste into description)
+    SLUG_description.txt  description draft with trackable link (edit, then paste)
+    SLUG_thumbnail.png    1280x720 thumbnail A
+    SLUG_thumbnail_alt.png 1280x720 thumbnail B (for A/B tests)
+
+Voice engines (env):
+    SNARKY_TTS_ENGINE=espeak (default) | piper
+    SNARKY_PIPER_MODEL=/path/to/en_US-voice.onnx  (required for piper)
+    SNARKY_PIPER_BIN=piper  (override binary name/path)
+Falls back to espeak with a warning if Piper is requested but unavailable,
+so CI machines without models still render.
 """
 
 from __future__ import annotations
 
 import json
+import os
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -30,12 +49,28 @@ WHITE = (255, 249, 255)
 MUTED = (207, 191, 213)
 GREEN = (122, 240, 189)
 FPS = 30
-FONT_B = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
-FONT_R = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+TRACKING_BASE = os.environ.get(
+    "SNARKY_TRACKING_BASE",
+    "https://nqcshihyfhthywpseilx.supabase.co/functions/v1/snarky-youtube",
+)
+
+FONT_CANDIDATES_B = [
+    "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+    "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
+    "/usr/share/fonts/truetype/noto/NotoSans-Bold.ttf",
+]
+FONT_CANDIDATES_R = [
+    "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+    "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",
+    "/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf",
+]
 
 
 def run(*args: str) -> None:
-    subprocess.run(args, check=True)
+    try:
+        subprocess.run(args, check=True)
+    except FileNotFoundError:
+        raise SystemExit(f"Missing binary: {args[0]} — install it, then re-run.")
 
 
 def media_duration(path: Path) -> float:
@@ -44,6 +79,13 @@ def media_duration(path: Path) -> float:
         text=True,
     )
     return float(out.strip())
+
+
+def pick_font(candidates: list[str]) -> str:
+    for path in candidates:
+        if os.path.exists(path):
+            return path
+    raise SystemExit(f"No usable font found. Tried: {', '.join(candidates)}")
 
 
 def font(path: str, size: int) -> ImageFont.FreeTypeFont:
@@ -108,10 +150,12 @@ def scene_image(size: tuple[int, int], scene: dict) -> Image.Image:
     pad = int(w * .07)
     draw.rounded_rectangle((pad, int(h*.08), w-pad, int(h*.92)), radius=int(min(w,h)*.025), fill=(25,13,33), outline=(60,40,80), width=max(2, int(w/700)))
 
-    kicker_font = font(FONT_B, max(26, int(min(w,h)*.032)))
-    title_font = font(FONT_B, max(52, int(min(w,h)*.075)))
-    body_font = font(FONT_R, max(27, int(min(w,h)*.034)))
-    cta_font = font(FONT_B, max(26, int(min(w,h)*.03)))
+    font_b = pick_font(FONT_CANDIDATES_B)
+    font_r = pick_font(FONT_CANDIDATES_R)
+    kicker_font = font(font_b, max(26, int(min(w,h)*.032)))
+    title_font = font(font_b, max(52, int(min(w,h)*.075)))
+    body_font = font(font_r, max(27, int(min(w,h)*.034)))
+    cta_font = font(font_b, max(26, int(min(w,h)*.03)))
 
     x = pad + int(w*.045)
     y = int(h*.14)
@@ -131,7 +175,7 @@ def scene_image(size: tuple[int, int], scene: dict) -> Image.Image:
         r = int(min(w,h)*.07)
         cx, cy = w-pad-int(w*.06), int(h*.17)
         draw.ellipse((cx-r, cy-r, cx+r, cy+r), fill=VIOLET)
-        number_font = font(FONT_B, int(r*.95))
+        number_font = font(font_b, int(r*.95))
         text = str(scene["number"])
         bb = draw.textbbox((0,0), text, font=number_font)
         draw.text((cx-(bb[2]-bb[0])/2, cy-(bb[3]-bb[1])/2-4), text, font=number_font, fill=(18,8,22))
@@ -146,21 +190,78 @@ def scene_image(size: tuple[int, int], scene: dict) -> Image.Image:
         draw.rounded_rectangle((x, cy, x+ctw, cy+int(h*.075)), radius=int(h*.02), fill=PINK)
         draw.text((x+int(w*.02), cy+int(h*.015)), cta, font=cta_font, fill=(18,8,22))
 
-    footer_font = font(FONT_B, max(20, int(min(w,h)*.023)))
+    footer_font = font(font_b, max(20, int(min(w,h)*.023)))
     draw.text((pad+int(w*.045), int(h*.875)), "SNARKY HOW-TO  •  REAL SOLUTIONS. NO BORING B.S.", font=footer_font, fill=(170,145,180))
     return image
 
 
 def synth_voice(text: str, path: Path, speed: int = 158) -> None:
+    engine = os.environ.get("SNARKY_TTS_ENGINE", "espeak").lower()
+    if engine == "piper":
+        model = os.environ.get("SNARKY_PIPER_MODEL", "")
+        binary = os.environ.get("SNARKY_PIPER_BIN", "piper")
+        if model and Path(model).exists():
+            run(binary, "-m", model, "-f", str(path), text)
+            return
+        print("WARNING: Piper requested but SNARKY_PIPER_MODEL missing — falling back to espeak.", file=sys.stderr)
     run("espeak", "-v", "en-us+f3", "-s", str(speed), "-p", "45", "-a", "175", "-w", str(path), text)
 
 
-def timestamp(seconds: float) -> str:
+def timestamp_srt(seconds: float) -> str:
     ms = int(round(seconds * 1000))
     hh, ms = divmod(ms, 3_600_000)
     mm, ms = divmod(ms, 60_000)
     ss, ms = divmod(ms, 1_000)
     return f"{hh:02d}:{mm:02d}:{ss:02d},{ms:03d}"
+
+
+def timestamp_vtt(seconds: float) -> str:
+    return timestamp_srt(seconds).replace(",", ".")
+
+
+def timestamp_chapter(seconds: float) -> str:
+    total = int(seconds)
+    mm, ss = divmod(total, 60)
+    return f"{mm:02d}:{ss:02d}"
+
+
+def campaign_for_slug(slug: str) -> str | None:
+    m = re.search(r"(\d{3})_(full|short)$", slug)
+    if not m:
+        return None
+    return f"snarky_{m.group(1)}_{m.group(2)}"
+
+
+def description_draft(config: dict, chapters: list[tuple[str, str]]) -> str:
+    slug = config["slug"]
+    campaign = campaign_for_slug(slug)
+    link = f"{TRACKING_BASE}?campaign={campaign}" if campaign else "(add trackable link)"
+    title = config.get("video_title", config.get("thumbnail_title", "Snarky How-To"))
+    lines = [
+        title,
+        "",
+        "Try the guide + 60-second offer picker:",
+        link,
+        "",
+        "No income guarantees. No fake testimonials. No paying to unlock work.",
+        "",
+        "Chapters:",
+    ]
+    lines += [f"{t} {name}" for t, name in chapters]
+    lines += ["", "#HowTo #Freelancing #SmallBusiness #SideHustle"]
+    return "\n".join(lines) + "\n"
+
+
+def dry_run(config: dict, variant: str) -> None:
+    scenes = config["scenes"]
+    chars = sum(len(s["voice"]) for s in scenes)
+    print(f"variant: {variant}  size: {config['size']}  slug: {config['slug']}")
+    print(f"scenes: {len(scenes)}  voice chars: {chars}  (~{chars/900:.1f} min spoken)")
+    for i, s in enumerate(scenes, 1):
+        print(f"  {i:02d} [{s.get('kicker','')}] {s['title']} ({len(s['voice'])} chars)")
+    campaign = campaign_for_slug(config["slug"])
+    print(f"campaign: {campaign or '(slug does not match NNN_full/short — tracking link manual)'}")
+    print("dry run OK — no media rendered.")
 
 
 def render(config: dict, out_dir: Path) -> None:
@@ -170,7 +271,9 @@ def render(config: dict, out_dir: Path) -> None:
     work.mkdir(parents=True, exist_ok=True)
     segments: list[Path] = []
     padded_audio: list[Path] = []
-    captions: list[str] = []
+    srt: list[str] = []
+    vtt: list[str] = ["WEBVTT\n"]
+    chapters: list[tuple[str, str]] = []
     elapsed = 0.0
 
     for index, scene in enumerate(config["scenes"], 1):
@@ -188,7 +291,9 @@ def render(config: dict, out_dir: Path) -> None:
         zoom = f"zoompan=z='min(zoom+0.00055,1.045)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={frames}:s={size[0]}x{size[1]}:fps={FPS},format=yuv420p"
         run("ffmpeg", "-y", "-loop", "1", "-i", str(image_path), "-vf", zoom, "-t", f"{segment_duration:.3f}", "-r", str(FPS), "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", "-an", str(segment))
         segments.append(segment)
-        captions.append(f"{index}\n{timestamp(elapsed)} --> {timestamp(elapsed+voice_duration)}\n{scene['voice']}\n")
+        srt.append(f"{index}\n{timestamp_srt(elapsed)} --> {timestamp_srt(elapsed+voice_duration)}\n{scene['voice']}\n")
+        vtt.append(f"{timestamp_vtt(elapsed)} --> {timestamp_vtt(elapsed+voice_duration)}\n{scene['voice']}\n")
+        chapters.append((timestamp_chapter(elapsed), scene["title"]))
         elapsed += segment_duration
 
     video_list = work / "videos.txt"
@@ -200,8 +305,16 @@ def render(config: dict, out_dir: Path) -> None:
     run("ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(video_list), "-c", "copy", str(raw_video))
     run("ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(audio_list), "-c", "copy", str(raw_audio))
     final = out_dir / f"{slug}.mp4"
-    run("ffmpeg", "-y", "-i", str(raw_video), "-i", str(raw_audio), "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-shortest", "-movflags", "+faststart", str(final))
-    (out_dir / f"{slug}.srt").write_text("\n".join(captions))
+    # Single-pass loudness normalization toward YouTube's -14 LUFS target.
+    run("ffmpeg", "-y", "-i", str(raw_video), "-i", str(raw_audio),
+        "-c:v", "copy", "-af", "loudnorm=I=-14:TP=-1.5:LRA=11",
+        "-c:a", "aac", "-b:a", "192k", "-ar", "48000",
+        "-shortest", "-movflags", "+faststart", str(final))
+    (out_dir / f"{slug}.srt").write_text("\n".join(srt))
+    (out_dir / f"{slug}.vtt").write_text("\n".join(vtt))
+    (out_dir / f"{slug}_chapters.txt").write_text(
+        "\n".join(f"{t} {name}" for t, name in chapters) + "\n")
+    (out_dir / f"{slug}_description.txt").write_text(description_draft(config, chapters))
     thumb_scene = {
         "kicker": "SNARKY HOW-TO",
         "title": config["thumbnail_title"],
@@ -209,19 +322,28 @@ def render(config: dict, out_dir: Path) -> None:
         "cta": "REAL SOLUTIONS →",
     }
     scene_image((1280, 720), thumb_scene).save(out_dir / f"{slug}_thumbnail.png")
+    alt_scene = dict(thumb_scene, panda=False, cta="WATCH →")
+    scene_image((1280, 720), alt_scene).save(out_dir / f"{slug}_thumbnail_alt.png")
     print(f"Rendered {final} ({media_duration(final):.2f}s)")
 
 
 def main() -> None:
-    if len(sys.argv) != 4:
-        raise SystemExit("usage: snarky_video_factory.py SCENES_JSON full|short OUTPUT_DIR")
-    config_path = Path(sys.argv[1])
-    variant = sys.argv[2]
-    out_dir = Path(sys.argv[3])
+    args = [a for a in sys.argv[1:] if a != "--dry-run"]
+    want_dry = "--dry-run" in sys.argv[1:] or "-h" in sys.argv[1:] or "--help" in sys.argv[1:]
+    if len(args) != 3 or want_dry and len(args) != 3 and "--dry-run" not in sys.argv[1:]:
+        pass
+    if len(args) != 3:
+        raise SystemExit("usage: snarky_video_factory.py SCENES_JSON full|short OUTPUT_DIR [--dry-run]")
+    config_path = Path(args[0])
+    variant = args[1]
+    out_dir = Path(args[2])
     out_dir.mkdir(parents=True, exist_ok=True)
     data = json.loads(config_path.read_text())
     if variant not in data:
         raise SystemExit(f"variant {variant!r} not found in {config_path}")
+    if "--dry-run" in sys.argv[1:]:
+        dry_run(data[variant], variant)
+        return
     render(data[variant], out_dir)
 
 

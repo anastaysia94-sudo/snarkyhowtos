@@ -27,19 +27,72 @@ jobs:
 
       - name: Validate video production source
         run: |
-          python -m py_compile tools/snarky_video_factory.py
+          pip install -r requirements-video.txt
+          python -m py_compile tools/snarky_video_factory.py tools/make_og_image.py
           python -m json.tool content/youtube/episode-001/scenes.json >/dev/null
+          python -m json.tool content/youtube/_TEMPLATE/scenes.template.json >/dev/null
+          python tools/snarky_video_factory.py content/youtube/episode-001/scenes.json full /tmp/dry --dry-run
           test -s content/youtube/episode-001/full.srt
           test -s content/youtube/episode-001/short.srt
 
       - name: Verify discovery and truth contracts
         run: |
-          grep -q 'HowTo' supabase/functions/snarky-how-to/index.ts
-          grep -q 'No income guarantees' supabase/functions/snarky-how-to/index.ts
-          grep -q 'Sarcasm is aimed at the situation' supabase/functions/snarky-how-to/index.ts
+          grep -q 'HowTo' supabase/functions/snarky-how-to/lib/pages/home.ts
+          grep -q 'FAQPage' supabase/functions/snarky-how-to/lib/pages/home.ts
+          grep -q 'VideoObject' supabase/functions/snarky-how-to/lib/pages/episode001.ts
+          grep -q 'llms.txt' supabase/functions/snarky-how-to/lib/layout.ts
+          grep -q 'No income guarantees' supabase/functions/snarky-how-to/lib/pages/home.ts
+          grep -q 'Sarcasm is aimed at the situation' supabase/functions/snarky-how-to/lib/layout.ts
           grep -q 'youtube_entry' supabase/functions/snarky-youtube/index.ts
           grep -q 'snarky_001_full' supabase/functions/snarky-youtube/index.ts
           grep -q 'snarky_001_short' supabase/functions/snarky-youtube/index.ts
+          grep -q 'snarky_010_short' supabase/functions/snarky-how-to/lib/config.ts
+          grep -q 'sps_snarky_campaign_funnel' supabase/migrations/202609200001_snarky_funnel_views.sql
+
+      - name: Smoke-test site routes locally (no DB needed for GET)
+        env:
+          SUPABASE_URL: https://example.supabase.co
+          SUPABASE_SERVICE_ROLE_KEY: dummy-local-key
+        run: |
+          deno run --allow-env --allow-net supabase/functions/snarky-how-to/index.ts &
+          SRV=$!
+          trap "kill $SRV" EXIT
+          for i in $(seq 1 30); do curl --silent --fail http://localhost:8000/healthz && break; sleep 1; done
+          curl --silent --fail http://localhost:8000/healthz | grep -q '"ok":true'
+          curl --silent --fail http://localhost:8000/ | grep -q 'Do not build the empire before the invoice'
+          curl --silent --fail http://localhost:8000/ | grep -q 'FAQPage'
+          curl --silent --fail http://localhost:8000/episodes | grep -q 'snarky_010_short\|Stop Paying to Find Work'
+          curl --silent --fail http://localhost:8000/episode-001 | grep -q 'VideoObject'
+          curl --silent --fail http://localhost:8000/about | grep -q 'Editorial policy'
+          curl --silent --fail http://localhost:8000/privacy | grep -q 'sht_sid'
+          curl --silent --fail http://localhost:8000/terms | grep -q 'not liable'
+          curl --silent --fail http://localhost:8000/disclosure | grep -q 'affiliate'
+          curl --silent --fail http://localhost:8000/robots.txt | grep -q 'Sitemap:'
+          curl --silent --fail http://localhost:8000/sitemap.xml | grep -q '<urlset'
+          curl --silent --fail http://localhost:8000/llms.txt | grep -q 'Citation preference'
+          curl --silent --fail http://localhost:8000/feed.xml | grep -q '<rss version'
+          curl --silent --fail http://localhost:8000/api/summary | grep -q 'episode_001_transcript'
+          curl --silent --fail http://localhost:8000/og-image.svg | grep -q '<svg'
+          test "$(curl --silent -o /dev/null -w '%{http_code}' http://localhost:8000/nope-not-real)" = "404"
+          # Analytics validation paths (400s never touch the DB):
+          test "$(curl --silent -o /dev/null -w '%{http_code}' -X POST http://localhost:8000/ -H 'content-type: application/json' -d '{"event_name":"nope","session_id":"long-enough-session"}')" = "400"
+          test "$(curl --silent -o /dev/null -w '%{http_code}' -X POST http://localhost:8000/ -H 'content-type: application/json' -d '{"event_name":"page_view","session_id":"short"}')" = "400"
+          kill $SRV; trap - EXIT
+
+      - name: Smoke-test YouTube redirect locally
+        env:
+          SUPABASE_URL: https://example.supabase.co
+          SUPABASE_SERVICE_ROLE_KEY: dummy-local-key
+        run: |
+          deno run --allow-env --allow-net supabase/functions/snarky-youtube/index.ts &
+          SRV=$!
+          trap "kill $SRV" EXIT
+          sleep 3
+          headers=$(curl --silent --show-error --head 'http://localhost:8000/?campaign=snarky_002_short')
+          echo "$headers" | grep -qi '^location:.*from=youtube.*campaign=snarky_002_short'
+          sub=$(curl --silent -o /dev/null -D - 'http://localhost:8000/?campaign=snarky_001_full&action=subscribe' | grep -i '^location:')
+          echo "$sub" | grep -qi 'youtube.com.*sub_confirmation=1'
+          kill $SRV; trap - EXIT
 
       - name: Verify live guide
         run: |
