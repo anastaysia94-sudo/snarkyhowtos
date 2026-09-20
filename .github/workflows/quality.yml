@@ -100,6 +100,14 @@ jobs:
             https://nqcshihyfhthywpseilx.supabase.co/functions/v1/snarky-how-to \
             | grep -q 'Do not build the empire before the invoice'
 
+      - name: Report live content-type (known platform limitation)
+        run: |
+          echo "Raw function URLs serve text/plain by Supabase gateway design (see cloudflare/README.md)."
+          echo "This step only reports; the Worker proxy on our domain is the fix."
+          curl --silent --show-error --head \
+            https://nqcshihyfhthywpseilx.supabase.co/functions/v1/snarky-how-to \
+            | grep -i '^content-type:' || true
+
       - name: Verify YouTube tracking redirect
         run: |
           headers=$(curl --fail --silent --show-error --head \

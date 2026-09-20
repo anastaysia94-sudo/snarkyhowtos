@@ -10,6 +10,7 @@ Copy this file to `content/youtube/episode-0NN/metadata.md` and fill every field
 **Thumbnail artifact:** `snarky_how_to_0NN_full_thumbnail.png` (A/B: `_alt` variant)
 **Caption sources:** `full.srt` + `full.vtt`
 **Trackable description link:** `https://nqcshihyfhthywpseilx.supabase.co/functions/v1/snarky-youtube?campaign=snarky_0NN_full`
+(Post-domain: use `https://snarkyhowto.com/go?campaign=snarky_0NN_full` instead — same tracking, renders on our headers. See `cloudflare/README.md`.)
 
 ### Description (paste-ready; chapters from `*_chapters.txt`)
 

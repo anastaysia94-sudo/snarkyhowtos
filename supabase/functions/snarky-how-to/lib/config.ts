@@ -19,10 +19,10 @@ export const FIRST_PUBLISHED = "2026-09-17";
 export const OFFER_PICKER =
   "https://today-offer-picker-smartpickshop.anastaysia98.chatgpt.site";
 
-// TODO(launch): verify the real channel handle and set YOUTUBE_CHANNEL_URL.
-// Default guess below; fix before announcing the newsletter/sponsor page.
+// Verified 2026-09-20: the project channel (repurposed account).
+// Override via YOUTUBE_CHANNEL_URL only if the handle ever moves.
 export const YOUTUBE_CHANNEL_URL = Deno.env.get("YOUTUBE_CHANNEL_URL") ||
-  "https://www.youtube.com/@SnarkyHowTo";
+  "https://www.youtube.com/@SnarkyHowTos";
 
 // Newsletter (recommended free stack: Beehiiv free tier up to 2,500 subs).
 // Empty = "opening soon" mode: the site shows a YouTube fallback CTA instead

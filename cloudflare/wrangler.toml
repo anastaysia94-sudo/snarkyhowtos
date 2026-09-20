@@ -1,0 +1,17 @@
+# Snarky How-To public proxy. Deploy AFTER buying the domain:
+#   npm i -g wrangler && wrangler login
+#   wrangler deploy   (from the repo root; see cloudflare/README.md)
+name = "snarky-how-to-proxy"
+main = "worker.js"
+compatibility_date = "2026-09-20"
+workers_dev = false
+
+[vars]
+ORIGIN_SITE = "https://nqcshihyfhthywpseilx.supabase.co/functions/v1/snarky-how-to"
+ORIGIN_YT = "https://nqcshihyfhthywpseilx.supabase.co/functions/v1/snarky-youtube"
+
+# Uncomment and set the real domain once purchased, then redeploy:
+# routes = [
+#   { pattern = "snarkyhowto.com/*", zone_name = "snarkyhowto.com" },
+#   { pattern = "www.snarkyhowto.com/*", zone_name = "snarkyhowto.com" },
+# ]

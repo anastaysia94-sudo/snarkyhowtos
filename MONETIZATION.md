@@ -67,8 +67,8 @@ layer is honest, cheap to start, and stacked on the free stack below.
 ## 90-day plan
 
 **Days 1–30 — Publish + verify.**
-- [ ] Verify/fix `YOUTUBE_CHANNEL_URL` in code + `config.ts` TODO
-- [ ] Buy domain via Cloudflare, proxy to function, set `SITE_BASE_URL`
+- [x] Channel verified + wired: `https://www.youtube.com/@SnarkyHowTos` (2026-09-20; repurposed account — unlist old unrelated playlists before launch)
+- [ ] Buy domain via Cloudflare, deploy Worker proxy (`cloudflare/README.md` — required: raw function URL renders as code), set `SITE_BASE_URL`
 - [ ] Submit sitemap to Search Console + Bing; request indexing for `/`, `/episodes`, `/episode-001`
 - [ ] Publish Ep 001 (full + Short) with trackable links; pin comment
 - [ ] Create Beehiiv pub, set `NEWSLETTER_URL`, send issue #0 to friends

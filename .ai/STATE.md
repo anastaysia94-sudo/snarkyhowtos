@@ -1,7 +1,7 @@
 # Shared AI state
 
 - **repo:** anastaysia94-sudo/snarkyhowtos
-- **status:** bold rewrite shipped on arena/01a0bece-snarkyhowtos 2026-09-20 (multi-route site, SEO/AEO surfaces, funnel views, video pipeline v2, monetization docs)
-- **active task:** deploy functions, verify channel handle, buy domain, set SITE_BASE_URL/NEWSLETTER_URL, publish Ep 001
+- **status:** arena branch merged with main (ep002) 2026-09-20; YT channel @SnarkyHowTos verified+wired; gateway text/plain root-caused, Cloudflare Worker proxy built (needs domain+deploy)
+- **active task:** buy domain, deploy worker, set SITE_BASE_URL, redeploy functions, publish Ep 001
 - **last assistant:** Arena
 - **updated:** 2026-09-20

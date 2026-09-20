@@ -4,6 +4,12 @@ Practical how-to content with a dry sense of humor and a measurable action path.
 
 **Live guide:** https://nqcshihyfhthywpseilx.supabase.co/functions/v1/snarky-how-to
 
+> Why does the raw link show code instead of the page? Supabase's gateway
+> force-serves function responses on `*.supabase.co` as `text/plain` + a
+> `sandbox` CSP (verified via headers 2026-09-20), so browsers display the
+> HTML source. The fix is the free Cloudflare Worker in `cloudflare/` — see
+> `cloudflare/README.md`, then use `https://snarkyhowto.com/` + `/go` links.
+
 ## What this repo is
 
 The canonical source for the Snarky How-To website, YouTube pipeline, and money path.

@@ -7,7 +7,7 @@ const key = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 const db = createClient(url, key, { auth: { persistSession: false } });
 const target = `${url}/functions/v1/snarky-how-to`;
 const channel = Deno.env.get("YOUTUBE_CHANNEL_URL") ||
-  "https://www.youtube.com/@SnarkyHowTo";
+  "https://www.youtube.com/@SnarkyHowTos"; // verified 2026-09-20
 
 // All 10 queued episodes x (full + short): snarky_001_full … snarky_010_short.
 // Unknown/missing campaigns still redirect (tracking degrades, visitors don't).

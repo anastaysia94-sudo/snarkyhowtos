@@ -41,8 +41,8 @@
    “crawled, not indexed” with internal links from new episodes.
 3. **Raster OG PNG**: run `tools/make_og_image.py`, host on the domain,
    swap `og:image`/`twitter:image` to PNG (keep SVG fallback).
-4. **YouTube verification**: confirm channel handle, update
-   `YOUTUBE_CHANNEL_URL`, link site in channel + every description.
+4. **YouTube**: handle confirmed 2026-09-20 (`@SnarkyHowTos`, already wired
+   in code). Still to do: link the site in the channel + every description.
 5. **Rich-result tests**: validate Article/HowTo/FAQ/VideoObject after deploy
    (Google Rich Results Test + Schema validator); fix warnings, not just errors.
 
