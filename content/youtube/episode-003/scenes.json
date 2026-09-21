@@ -1,0 +1,105 @@
+{
+  "full": {
+    "size": [1920, 1080],
+    "slug": "snarky_how_to_003_full",
+    "thumbnail_title": "FOLLOW-UP EMAILS",
+    "thumbnail_subtitle": "Without sounding desperate",
+    "scenes": [
+      {
+        "kicker": "SNARKY HOW-TO #003",
+        "title": "The follow-up that begs is already dead.",
+        "body": "Desperation is a smell. Clear next steps are a service. One good email beats three sad ones.",
+        "voice": "The follow-up that begs is already dead. Desperation is a smell. Clear next steps are a service. One good email beats three sad ones that apologize for existing.",
+        "cta": "WRITE ONCE. SEND ONCE."
+      },
+      {
+        "kicker": "THE RULE",
+        "title": "Assume they are busy, not cruel.",
+        "body": "Your job is to make the next decision easy. Not to perform emotional labor for their inbox.",
+        "voice": "Rule one. Assume they are busy, not cruel. Your job is to make the next decision easy, not to perform emotional labor for their inbox."
+      },
+      {
+        "kicker": "SCRIPT 1",
+        "title": "The 48-hour nudge.",
+        "body": "Subject: quick follow-up on [specific thing] • Body: one sentence reminder + one clear question + soft out.",
+        "voice": "Script one. The forty eight hour nudge. Subject line names the specific thing. Body is one sentence reminder, one clear question, and a soft out. No 'just checking in' without a reason.",
+        "number": 1
+      },
+      {
+        "kicker": "SCRIPT 2",
+        "title": "The value-add bump.",
+        "body": "Add one new useful scrap: a link, a sentence of insight, a corrected detail. Never pure 'any update?'",
+        "voice": "Script two. The value-add bump. You give them one new useful scrap. A link, a sentence of insight, a corrected detail. Pure 'any update' is just noise with manners.",
+        "number": 2
+      },
+      {
+        "kicker": "SCRIPT 3",
+        "title": "The close-the-loop final.",
+        "body": "I am closing my file on this unless I hear otherwise. Still happy to help if the timing changes.",
+        "voice": "Script three. The close-the-loop final. I am closing my file on this unless I hear otherwise. Still happy to help if the timing changes. Dignity intact. Inbox free.",
+        "number": 3
+      },
+      {
+        "kicker": "TIMING",
+        "title": "When to send (and stop).",
+        "body": "Day 2-3 first. Day 7 second. Day 14 final. Then stop. Silence is also data.",
+        "voice": "Timing. First follow-up day two or three. Second around day seven. Final around day fourteen. Then stop. Silence is also data. Do not become a recurring notification."
+      },
+      {
+        "kicker": "TONE CHECK",
+        "title": "Read it out loud. Cringe test.",
+        "body": "If it sounds like you need them more than they need the result, rewrite. Helpful > hungry.",
+        "voice": "Tone check. Read it out loud. If it sounds like you need them more than they need the result, rewrite. Helpful beats hungry every single time."
+      },
+      {
+        "kicker": "NEXT MOVE",
+        "title": "Copy the scripts. Customize three fields.",
+        "body": "Specific subject. Specific prior conversation. Specific ask. Then send and close the tab.",
+        "voice": "Your next move. Copy the three scripts. Customize the subject, the prior conversation, and the specific ask. Send one. Close the tab. The empire of unread emails can wait.",
+        "cta": "LINK IN DESCRIPTION →"
+      }
+    ]
+  },
+  "short": {
+    "size": [1080, 1920],
+    "slug": "snarky_how_to_003_short",
+    "thumbnail_title": "STOP SOUNDING DESPERATE",
+    "thumbnail_subtitle": "In follow-up emails",
+    "scenes": [
+      {
+        "kicker": "SNARKY HOW-TO",
+        "title": "Follow-ups that beg die alone.",
+        "body": "Clear next step > emotional apology tour.",
+        "voice": "Follow-ups that beg die alone in the inbox. Clear next step beats the emotional apology tour."
+      },
+      {
+        "kicker": "THREE SCRIPTS",
+        "title": "1. 48-hour nudge",
+        "body": "Specific subject + one question + soft out.",
+        "voice": "Three scripts. One: forty eight hour nudge. Specific subject, one clear question, soft out.",
+        "number": 1
+      },
+      {
+        "kicker": "TWO",
+        "title": "2. Value-add bump",
+        "body": "Give them one new useful scrap. Never pure 'any news?'",
+        "voice": "Two: value-add bump. Give one new useful scrap. Never pure any news.",
+        "number": 2
+      },
+      {
+        "kicker": "THREE",
+        "title": "3. Close the loop",
+        "body": "Closing my file unless I hear otherwise. Dignity intact.",
+        "voice": "Three: close the loop. Closing my file unless I hear otherwise. Dignity intact.",
+        "number": 3
+      },
+      {
+        "kicker": "THAT'S IT",
+        "title": "Send once. Stop.",
+        "body": "Day 2, day 7, day 14. Then silence is data.",
+        "voice": "That is it. Day two, day seven, day fourteen. Then stop. Silence is also data. Link in description for the full scripts.",
+        "cta": "LINK →"
+      }
+    ]
+  }
+}
