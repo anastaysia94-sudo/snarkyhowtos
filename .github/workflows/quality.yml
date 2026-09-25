@@ -28,9 +28,28 @@ jobs:
       - name: Validate video production source
         run: |
           python -m py_compile tools/snarky_video_factory.py
-          python -m json.tool content/youtube/episode-001/scenes.json >/dev/null
-          test -s content/youtube/episode-001/full.srt
-          test -s content/youtube/episode-001/short.srt
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          for number in range(1, 8):
+              episode = Path(f"content/youtube/episode-{number:03d}")
+              scenes_path = episode / "scenes.json"
+              data = json.loads(scenes_path.read_text(encoding="utf-8"))
+              for mode, expected_size in (("full", [1920, 1080]), ("short", [1080, 1920])):
+                  package = data.get(mode)
+                  assert isinstance(package, dict), f"{scenes_path}: missing {mode}"
+                  assert package.get("size") == expected_size, f"{scenes_path}: bad {mode} size"
+                  assert package.get("slug"), f"{scenes_path}: missing {mode} slug"
+                  scenes = package.get("scenes")
+                  assert isinstance(scenes, list) and scenes, f"{scenes_path}: empty {mode} scenes"
+                  for index, scene in enumerate(scenes, 1):
+                      assert str(scene.get("title", "")).strip(), f"{scenes_path}: {mode} scene {index} missing title"
+                      assert str(scene.get("voice", "")).strip(), f"{scenes_path}: {mode} scene {index} missing voice"
+                  srt = episode / f"{mode}.srt"
+                  assert srt.is_file() and srt.stat().st_size > 0, f"{srt}: missing/empty"
+          print("episodes 001-007 source packages: PASS")
+          PY
 
       - name: Verify discovery and truth contracts
         run: |
