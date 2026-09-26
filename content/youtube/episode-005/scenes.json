@@ -1,0 +1,104 @@
+{
+  "full": {
+    "size": [1920, 1080],
+    "slug": "snarky_how_to_005_full",
+    "thumbnail_title": "ONE-PAGE OFFER",
+    "thumbnail_subtitle": "Someone can actually understand",
+    "scenes": [
+      {
+        "kicker": "SNARKY HOW-TO #005",
+        "title": "If they need a decoder, it is not an offer.",
+        "body": "A one-page offer is not a brochure. It is a decision tool. Outcome, scope, deadline, price, proof.",
+        "voice": "If they need a decoder ring to understand your offer, it is not an offer. It is a riddle. A one-page offer is a decision tool, not a brochure.",
+        "cta": "MAKE IT OBVIOUS."
+      },
+      {
+        "kicker": "THE FIVE PARTS",
+        "title": "Everything else is optional. These five are not.",
+        "body": "1. Outcome  2. Scope  3. Deadline  4. Price  5. Proof (even tiny)",
+        "voice": "Five parts. Everything else is optional. These five are not. Outcome. Scope. Deadline. Price. And some form of proof, even if it is tiny."
+      },
+      {
+        "kicker": "OUTCOME",
+        "title": "What changes for them?",
+        "body": "Not what you will do. What they will have, see, or stop worrying about when you are done.",
+        "voice": "Outcome. What changes for them? Not the activities you will perform. What they will have, see, or stop worrying about when you are finished.",
+        "number": 1
+      },
+      {
+        "kicker": "SCOPE",
+        "title": "What is included. What is not.",
+        "body": "Boundaries protect both sides. 'I will do X. I will not do Y or Z.' Clear is kind.",
+        "voice": "Scope. What is included and what is not. Boundaries protect both sides. I will do X. I will not do Y or Z. Clear is kind.",
+        "number": 2
+      },
+      {
+        "kicker": "DEADLINE + PRICE",
+        "title": "When and how much. No mystery.",
+        "body": "Specific delivery date or turnaround. One number or a simple range with what moves it.",
+        "voice": "Deadline and price. When they get it and how much it costs. Specific delivery date or turnaround window. One clear number or a simple range that explains what moves the price.",
+        "number": 3
+      },
+      {
+        "kicker": "PROOF",
+        "title": "Even a tiny scrap beats nothing.",
+        "body": "Before/after, a named similar result, a short process note, or 'I have done this exact thing for three other teams'.",
+        "voice": "Proof. Even a tiny scrap beats nothing. A before and after, a named similar result, a short process note, or simply I have done this exact thing for three other teams.",
+        "number": 4
+      },
+      {
+        "kicker": "FORMAT",
+        "title": "One page. Readable on a phone.",
+        "body": "Big outcome at top. Then the four remaining pieces. CTA at the bottom. No walls of text.",
+        "voice": "Format. One page. Readable on a phone. Big outcome at the top. Then the remaining pieces. Call to action at the bottom. No walls of text. No jargon."
+      },
+      {
+        "kicker": "NEXT MOVE",
+        "title": "Write one for a real problem today.",
+        "body": "Pick a service you can actually deliver. Fill the five slots. Send it to one real person.",
+        "voice": "Your next move. Write one for a real problem today. Pick a service you can actually deliver. Fill the five slots. Send it to one real person. The fancy deck can stay in the drawer.",
+        "cta": "LINK IN DESCRIPTION →"
+      }
+    ]
+  },
+  "short": {
+    "size": [1080, 1920],
+    "slug": "snarky_how_to_005_short",
+    "thumbnail_title": "ONE-PAGE OFFER",
+    "thumbnail_subtitle": "That makes sense",
+    "scenes": [
+      {
+        "kicker": "SNARKY HOW-TO",
+        "title": "If they need a decoder, rewrite.",
+        "body": "Offers are decision tools, not brochures.",
+        "voice": "If they need a decoder to understand your offer, rewrite it. Offers are decision tools, not brochures."
+      },
+      {
+        "kicker": "FIVE PARTS",
+        "title": "Outcome. Scope. Deadline. Price. Proof.",
+        "body": "Everything else is optional. These five are not.",
+        "voice": "Five parts. Outcome. Scope. Deadline. Price. Proof. Everything else is optional.",
+        "number": 5
+      },
+      {
+        "kicker": "OUTCOME FIRST",
+        "title": "What changes for them?",
+        "body": "Not your activities. Their result.",
+        "voice": "Outcome first. What changes for them? Not your activities. Their result."
+      },
+      {
+        "kicker": "THEN THE REST",
+        "title": "Boundaries. When. How much. Tiny proof.",
+        "body": "Clear is kind. Mystery is expensive.",
+        "voice": "Then the rest. Boundaries, when, how much, and even tiny proof. Clear is kind. Mystery is expensive."
+      },
+      {
+        "kicker": "THAT'S IT",
+        "title": "One page. Phone readable. Send it.",
+        "body": "Write one for a real problem today.",
+        "voice": "That is it. One page. Phone readable. Write one for a real problem today and send it. Template in the description.",
+        "cta": "LINK →"
+      }
+    ]
+  }
+}

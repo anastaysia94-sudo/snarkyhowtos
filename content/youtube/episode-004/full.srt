@@ -1,0 +1,32 @@
+1
+00:00:00,000 --> 00:00:11,111
+Your spreadsheet looks like it lost a fight in a parking lot. Merged cells, rainbow tabs, and mystery columns are not a system. They are a crime scene with formulas.
+
+2
+00:00:11,511 --> 00:00:21,141
+The goal is not pretty. The goal is useful for a stranger tomorrow. If someone else has to reverse-engineer your work, you still have a problem.
+
+3
+00:00:21,541 --> 00:00:28,948
+Step one. Kill the merged cells. Unmerge everything. One value per cell. Headers only in row one. No artistic exceptions.
+
+4
+00:00:29,348 --> 00:00:38,607
+Step two. One tab, one purpose. Raw data. Clean data. Working calculations. Dashboard. Name the tabs so a human understands them without a decoder ring.
+
+5
+00:00:39,007 --> 00:00:47,156
+Step three. Fix the headers and freeze them. Clear names. No secret abbreviations. Freeze the top row. Turn filters on. Instant dignity.
+
+6
+00:00:47,556 --> 00:00:56,444
+Step four. Delete the dead weight. Empty columns. Old notes. Hash R E F ghosts. Hidden sheets that still calculate in the background. Gone.
+
+7
+00:00:56,844 --> 00:01:07,956
+Step five. Document the non-obvious. One cell comment or a tiny Notes tab that explains any formula that is not self-evident. Future you will send past you a thank-you card.
+
+8
+00:01:08,356 --> 00:01:19,837
+Your next move. Pick the ugliest sheet you have. Fix it today with this checklist. Save a before copy for comedy. Then make the after version the only version that lives.
+
