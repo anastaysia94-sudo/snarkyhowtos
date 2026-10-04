@@ -1,0 +1,106 @@
+{
+  "full": {
+    "size": [1920, 1080],
+    "slug": "snarky_how_to_004_full",
+    "thumbnail_title": "FIX THE SPREADSHEET",
+    "thumbnail_subtitle": "That survived a bar fight",
+    "scenes": [
+      {
+        "kicker": "SNARKY HOW-TO #004",
+        "title": "Your spreadsheet looks like it lost a fight.",
+        "body": "Merged cells, rainbow tabs, and mystery columns are not a system. They are a crime scene.",
+        "voice": "Your spreadsheet looks like it lost a fight in a parking lot. Merged cells, rainbow tabs, and mystery columns are not a system. They are a crime scene with formulas.",
+        "cta": "CLEAN IT. OWN IT."
+      },
+      {
+        "kicker": "THE GOAL",
+        "title": "Make it useful for a stranger tomorrow.",
+        "body": "If someone else has to reverse-engineer your work, you still have a problem.",
+        "voice": "The goal is not pretty. The goal is useful for a stranger tomorrow. If someone else has to reverse-engineer your work, you still have a problem."
+      },
+      {
+        "kicker": "STEP 1",
+        "title": "Kill the merged cells.",
+        "body": "Unmerge everything. One value per cell. Headers only in row one. No exceptions.",
+        "voice": "Step one. Kill the merged cells. Unmerge everything. One value per cell. Headers only in row one. No artistic exceptions.",
+        "number": 1
+      },
+      {
+        "kicker": "STEP 2",
+        "title": "One tab, one purpose.",
+        "body": "Raw data. Clean data. Working calc. Dashboard. Name the tabs so a human understands them.",
+        "voice": "Step two. One tab, one purpose. Raw data. Clean data. Working calculations. Dashboard. Name the tabs so a human understands them without a decoder ring.",
+        "number": 2
+      },
+      {
+        "kicker": "STEP 3",
+        "title": "Fix the headers and freeze them.",
+        "body": "Clear names. No abbreviations only you understand. Freeze the top row. Filter on.",
+        "voice": "Step three. Fix the headers and freeze them. Clear names. No secret abbreviations. Freeze the top row. Turn filters on. Instant dignity.",
+        "number": 3
+      },
+      {
+        "kicker": "STEP 4",
+        "title": "Delete the dead weight.",
+        "body": "Empty columns. Old notes. #REF! ghosts. Hidden sheets that still calculate. Gone.",
+        "voice": "Step four. Delete the dead weight. Empty columns. Old notes. Hash R E F ghosts. Hidden sheets that still calculate in the background. Gone.",
+        "number": 4
+      },
+      {
+        "kicker": "STEP 5",
+        "title": "Document the non-obvious.",
+        "body": "One cell comment or a tiny Notes tab explaining any formula that is not self-evident.",
+        "voice": "Step five. Document the non-obvious. One cell comment or a tiny Notes tab that explains any formula that is not self-evident. Future you will send past you a thank-you card."
+      },
+      {
+        "kicker": "NEXT MOVE",
+        "title": "Pick the ugliest sheet. Fix it today.",
+        "body": "Use the checklist. Save a before copy. Then make the after version the only version that lives.",
+        "voice": "Your next move. Pick the ugliest sheet you have. Fix it today with this checklist. Save a before copy for comedy. Then make the after version the only version that lives.",
+        "cta": "LINK IN DESCRIPTION →"
+      }
+    ]
+  },
+  "short": {
+    "size": [1080, 1920],
+    "slug": "snarky_how_to_004_short",
+    "thumbnail_title": "YOUR SPREADSHEET",
+    "thumbnail_subtitle": "Lost a bar fight",
+    "scenes": [
+      {
+        "kicker": "SNARKY HOW-TO",
+        "title": "Spreadsheet looks like a crime scene.",
+        "body": "Merged cells and mystery columns are not features.",
+        "voice": "Your spreadsheet looks like a crime scene. Merged cells and mystery columns are not features."
+      },
+      {
+        "kicker": "FIX 1",
+        "title": "Unmerge everything.",
+        "body": "One value per cell. Headers in row one only.",
+        "voice": "Fix one. Unmerge everything. One value per cell. Headers in row one only.",
+        "number": 1
+      },
+      {
+        "kicker": "FIX 2",
+        "title": "One tab, one job.",
+        "body": "Raw. Clean. Calc. Dashboard. Name them clearly.",
+        "voice": "Fix two. One tab, one job. Raw, clean, calc, dashboard. Name them clearly.",
+        "number": 2
+      },
+      {
+        "kicker": "FIX 3",
+        "title": "Freeze + filter + kill dead weight.",
+        "body": "Clear headers. Delete the ghosts. Document the weird formulas.",
+        "voice": "Fix three. Freeze headers, turn on filters, kill dead weight, document the weird formulas.",
+        "number": 3
+      },
+      {
+        "kicker": "THAT'S IT",
+        "title": "Make it useful for a stranger.",
+        "body": "If only you understand it, it is still broken.",
+        "voice": "That is it. Make it useful for a stranger tomorrow. If only you understand it, it is still broken. Checklist in the description.",
+        "cta": "LINK →"
+      }
+    ]
+  }
+}

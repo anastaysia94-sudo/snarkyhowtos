@@ -1,0 +1,20 @@
+1
+00:00:00,000 --> 00:00:05,556
+Your spreadsheet looks like a crime scene. Merged cells and mystery columns are not features.
+
+2
+00:00:05,956 --> 00:00:10,770
+Fix one. Unmerge everything. One value per cell. Headers in row one only.
+
+3
+00:00:11,170 --> 00:00:15,985
+Fix two. One tab, one job. Raw, clean, calc, dashboard. Name them clearly.
+
+4
+00:00:16,385 --> 00:00:21,570
+Fix three. Freeze headers, turn on filters, kill dead weight, document the weird formulas.
+
+5
+00:00:21,970 --> 00:00:30,489
+That is it. Make it useful for a stranger tomorrow. If only you understand it, it is still broken. Checklist in the description.
+

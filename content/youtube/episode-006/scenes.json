@@ -1,0 +1,105 @@
+{
+  "full": {
+    "size": [1920, 1080],
+    "slug": "snarky_how_to_006_full",
+    "thumbnail_title": "PORTFOLIO, NO CLIENTS",
+    "thumbnail_subtitle": "Without lying",
+    "scenes": [
+      {
+        "kicker": "SNARKY HOW-TO #006",
+        "title": "No clients yet is not a character flaw.",
+        "body": "It is a labeling problem. Sample work, personal projects, and clear process still count when you do not pretend they are paid case studies.",
+        "voice": "No clients yet is not a character flaw. It is a labeling problem. Sample work, personal projects, and clear process still count when you do not pretend they are paid case studies.",
+        "cta": "SHOW REAL WORK. LABEL IT HONESTLY."
+      },
+      {
+        "kicker": "THE RULE",
+        "title": "Never claim what did not happen.",
+        "body": "No fake logos. No invented metrics. No 'client' language for self-assigned practice. Honesty is a feature.",
+        "voice": "The rule. Never claim what did not happen. No fake logos. No invented metrics. No client language for self-assigned practice. Honesty is a feature, not a bug."
+      },
+      {
+        "kicker": "OPTION 1",
+        "title": "Rebuild something that exists (publicly).",
+        "body": "Take a real public site or product. Redesign one page or rewrite one flow. Show before and after. Label it as a redesign study.",
+        "voice": "Option one. Rebuild something that already exists publicly. Take a real site or product. Redesign one page or rewrite one flow. Show before and after. Label it clearly as a redesign study.",
+        "number": 1
+      },
+      {
+        "kicker": "OPTION 2",
+        "title": "Solve a real problem for free once.",
+        "body": "Help a friend, a nonprofit, a local shop, or an open-source project. Document the problem, your process, and the result. Get permission to show it.",
+        "voice": "Option two. Solve a real problem for free once. Help a friend, a nonprofit, a local shop, or an open-source project. Document the problem, your process, and the result. Get permission to show it.",
+        "number": 2
+      },
+      {
+        "kicker": "OPTION 3",
+        "title": "Publish the process itself.",
+        "body": "A detailed teardown, a how-I-would-fix series, or a sample deliverable pack. Process transparency builds trust faster than empty case studies.",
+        "voice": "Option three. Publish the process itself. A detailed teardown, a how I would fix this series, or a sample deliverable pack. Process transparency builds trust faster than empty case studies.",
+        "number": 3
+      },
+      {
+        "kicker": "LABELING",
+        "title": "Say exactly what it is.",
+        "body": "'Sample project', 'personal study', 'pro-bono for [name]', 'redesign concept'. Never 'client work' if it was not.",
+        "voice": "Labeling. Say exactly what it is. Sample project. Personal study. Pro-bono for this organization. Redesign concept. Never call it client work if it was not."
+      },
+      {
+        "kicker": "EVIDENCE",
+        "title": "Show the thinking, not just the final pretty.",
+        "body": "Problem statement. Constraints. Decisions you made. What you would do differently next time. That is the real portfolio.",
+        "voice": "Evidence. Show the thinking, not just the final pretty picture. Problem statement. Constraints. Decisions you made. What you would do differently next time. That is the real portfolio."
+      },
+      {
+        "kicker": "NEXT MOVE",
+        "title": "Ship one honest piece this week.",
+        "body": "Pick one option. Produce it. Label it correctly. Put it where people can see it. Then go find the first paid version of the same thing.",
+        "voice": "Your next move. Ship one honest piece this week. Pick one of the three options. Produce it. Label it correctly. Put it where people can see it. Then go find the first paid version of the same thing.",
+        "cta": "LINK IN DESCRIPTION →"
+      }
+    ]
+  },
+  "short": {
+    "size": [1080, 1920],
+    "slug": "snarky_how_to_006_short",
+    "thumbnail_title": "PORTFOLIO WITH ZERO CLIENTS",
+    "thumbnail_subtitle": "Without lying",
+    "scenes": [
+      {
+        "kicker": "SNARKY HOW-TO",
+        "title": "No clients is a labeling problem.",
+        "body": "Not a character flaw. Show real work. Label it honestly.",
+        "voice": "No clients yet is a labeling problem, not a character flaw. Show real work. Label it honestly."
+      },
+      {
+        "kicker": "THREE HONEST OPTIONS",
+        "title": "1. Public redesign study",
+        "body": "Rebuild something real. Show before/after. Call it a study.",
+        "voice": "Three honest options. One: public redesign study. Rebuild something real. Show before and after. Call it a study.",
+        "number": 1
+      },
+      {
+        "kicker": "TWO",
+        "title": "2. One pro-bono real problem",
+        "body": "Friend, nonprofit, local shop. Document and get permission.",
+        "voice": "Two: one pro-bono real problem. Friend, nonprofit, local shop. Document it and get permission.",
+        "number": 2
+      },
+      {
+        "kicker": "THREE",
+        "title": "3. Publish the process",
+        "body": "Teardowns, sample deliverables, how-I-would-fix series.",
+        "voice": "Three: publish the process. Teardowns, sample deliverables, how I would fix this series.",
+        "number": 3
+      },
+      {
+        "kicker": "THAT'S IT",
+        "title": "Label it correctly. Ship one this week.",
+        "body": "Never call practice 'client work'. Honesty is the feature.",
+        "voice": "That is it. Label it correctly. Ship one this week. Never call practice client work. Honesty is the feature. Details in the description.",
+        "cta": "LINK →"
+      }
+    ]
+  }
+}

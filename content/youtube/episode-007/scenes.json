@@ -1,0 +1,106 @@
+{
+  "full": {
+    "size": [1920, 1080],
+    "slug": "snarky_how_to_007_full",
+    "thumbnail_title": "PRICE A SMALL SERVICE",
+    "thumbnail_subtitle": "Without summoning consultants",
+    "scenes": [
+      {
+        "kicker": "SNARKY HOW-TO #007",
+        "title": "Pricing is not a personality test.",
+        "body": "It is scope first, then a number that lets you deliver well and still eat. Fancy frameworks can wait.",
+        "voice": "Pricing is not a personality test. It is scope first, then a number that lets you deliver well and still eat. Fancy consulting frameworks can wait outside.",
+        "cta": "SCOPE FIRST. THEN PRICE."
+      },
+      {
+        "kicker": "THE ORDER",
+        "title": "Never start with the number.",
+        "body": "Start with what is included, what is excluded, how long it takes, and what 'done' looks like. The number comes last.",
+        "voice": "The order. Never start with the number. Start with what is included, what is excluded, how long it actually takes, and what done looks like. The number comes last."
+      },
+      {
+        "kicker": "STEP 1",
+        "title": "Write the outcome in one sentence.",
+        "body": "What the buyer has when you are finished. Concrete beats impressive.",
+        "voice": "Step one. Write the outcome in one sentence. What the buyer has when you are finished. Concrete beats impressive every time.",
+        "number": 1
+      },
+      {
+        "kicker": "STEP 2",
+        "title": "List the work. Be honest about hours.",
+        "body": "Include the boring parts: revisions, admin, research, waiting on them. Then multiply by a sustainable hourly floor.",
+        "voice": "Step two. List the actual work. Be honest about hours. Include the boring parts: revisions, admin, research, waiting on the client. Then multiply by a sustainable hourly floor you can live with.",
+        "number": 2
+      },
+      {
+        "kicker": "STEP 3",
+        "title": "Add the risk buffer.",
+        "body": "New client? Unclear brief? Tight deadline? Add 20 to 40 percent. Underpricing is not a growth strategy.",
+        "voice": "Step three. Add the risk buffer. New client? Unclear brief? Tight deadline? Add twenty to forty percent. Underpricing is not a growth strategy. It is a slow way to burn out.",
+        "number": 3
+      },
+      {
+        "kicker": "STEP 4",
+        "title": "Round to a clean number and explain it.",
+        "body": "Prefer whole hundreds or simple packages. One sentence why this price protects the result.",
+        "voice": "Step four. Round to a clean number and explain it. Prefer whole hundreds or simple packages. One sentence why this price protects the result for both of you.",
+        "number": 4
+      },
+      {
+        "kicker": "BOUNDARIES",
+        "title": "What happens when scope creeps.",
+        "body": "Write it down. Extra requests = new quote. Niceness without boundaries is just unpaid labor.",
+        "voice": "Boundaries. What happens when scope creeps. Write it down. Extra requests become a new quote. Niceness without boundaries is just unpaid labor with better manners."
+      },
+      {
+        "kicker": "NEXT MOVE",
+        "title": "Price one real service today.",
+        "body": "Use the four steps. Write the number. Put it on the one-page offer. Send it. Adjust only after real data.",
+        "voice": "Your next move. Price one real service today. Use the four steps. Write the number. Put it on the one-page offer. Send it. Adjust only after real data, not after a panic spiral.",
+        "cta": "LINK IN DESCRIPTION →"
+      }
+    ]
+  },
+  "short": {
+    "size": [1080, 1920],
+    "slug": "snarky_how_to_007_short",
+    "thumbnail_title": "PRICE WITHOUT",
+    "thumbnail_subtitle": "The consulting firm",
+    "scenes": [
+      {
+        "kicker": "SNARKY HOW-TO",
+        "title": "Pricing is not a personality test.",
+        "body": "Scope first. Then a number you can deliver on.",
+        "voice": "Pricing is not a personality test. Scope first. Then a number you can actually deliver on."
+      },
+      {
+        "kicker": "FOUR STEPS",
+        "title": "1. One-sentence outcome",
+        "body": "What they have when you finish.",
+        "voice": "Four steps. One: one-sentence outcome. What they have when you finish.",
+        "number": 1
+      },
+      {
+        "kicker": "TWO",
+        "title": "2. Honest hours + floor rate",
+        "body": "Include the boring admin and waiting.",
+        "voice": "Two: honest hours plus a sustainable floor rate. Include the boring admin and waiting.",
+        "number": 2
+      },
+      {
+        "kicker": "THREE + FOUR",
+        "title": "3. Risk buffer  4. Clean number + why",
+        "body": "20-40% buffer. Round clean. One sentence of protection.",
+        "voice": "Three: risk buffer of twenty to forty percent. Four: clean number and one sentence why it protects the result.",
+        "number": 3
+      },
+      {
+        "kicker": "THAT'S IT",
+        "title": "Write the number. Send the offer.",
+        "body": "Adjust after real data, not after panic.",
+        "voice": "That is it. Write the number. Put it on the offer. Send it. Adjust after real data, not after panic. Details in the description.",
+        "cta": "LINK →"
+      }
+    ]
+  }
+}
